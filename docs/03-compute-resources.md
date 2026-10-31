@@ -54,6 +54,8 @@ Restart the `sshd` SSH server to pick up the updated configuration file:
 systemctl restart sshd
 ```
 
+> **Gotcha (Multipass / Ubuntu VMs):** the steps above and `ssh-copy-id` below assume Debian, where `root` has a password. On Ubuntu cloud images `root` has no password and its `authorized_keys` only holds a "please log in as `ubuntu`" forced command, so `su - root` has nothing to prompt for and `ssh-copy-id root@...` fails with `Permission denied (publickey)`. Skip this section, generate the key on the `jumpbox` as described below, then run `make setup-ssh` from your workstation (not the `jumpbox`) instead of the `ssh-copy-id` loop. It writes the `jumpbox` public key into `/root/.ssh/authorized_keys` on every other machine through `multipass exec`.
+
 ### Generate and Distribute SSH Keys
 
 In this section you will generate and distribute an SSH keypair to the `server`, `node-0`, and `node-1`, machines, which will be used to run commands on those machines throughout this tutorial. Run the following commands from the `jumpbox` machine.

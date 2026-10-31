@@ -137,4 +137,8 @@ Kustomize Version: v5.5.0
 
 At this point the `jumpbox` has been set up with all the command line tools and utilities necessary to complete the labs in this tutorial.
 
+### Troubleshooting
+
+If the machines are Multipass VMs on macOS and `multipass exec`, `multipass shell` or `ping` fail with `No route to host` even though `multipass list` shows the VM running with an IP, macOS is blocking local network access for your terminal app. Go to **System Settings > Privacy & Security > Local Network** and enable the app you run the Multipass CLI from (Terminal, iTerm2, Ghostty, your IDE, etc.), then restart that app. See [canonical/multipass#3766](https://github.com/canonical/multipass/issues/3766#issuecomment-2587731706).
+
 Next: [Provisioning Compute Resources](03-compute-resources.md)

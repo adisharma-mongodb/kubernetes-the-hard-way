@@ -28,6 +28,23 @@ Component versions:
 
 This tutorial requires four (4) ARM64 or AMD64 based virtual or physical machines connected to the same network.
 
+### Quick start with Multipass (macOS)
+
+The `Makefile` and `scripts/` automate the first labs on four [Multipass](https://multipass.run) Ubuntu VMs (`jumpbox`, `server`, `node-0`, `node-1`). Run these from your workstation, in order:
+
+```bash
+make prerequisites      # create the four VMs (stopped afterwards)
+multipass start k8s-hard-way-{jumpbox,server,node-0,node-1}   # must be running for the next steps
+make setup-jumpbox      # lab 02: tools, binaries and kubectl on the jumpbox
+make compute-resources  # lab 03: machines.txt, root SSH, hostnames, /etc/hosts
+make create-certs       # lab 04: CA and TLS certificates
+make create-kubeconfigs # lab 05: kubeconfig files
+```
+
+Then continue from [lab 06](docs/06-data-encryption-keys.md) on the jumpbox (`multipass shell k8s-hard-way-jumpbox`, then `cd kubernetes-the-hard-way`). VM sizes and names are variables at the top of the `Makefile`. When done, `make stop-machines` keeps the VMs, or `make delete-machines` removes them. If you see `No route to host`, see the troubleshooting note in [lab 02](docs/02-jumpbox.md).
+
+### Labs
+
 * [Prerequisites](docs/01-prerequisites.md)
 * [Setting up the Jumpbox](docs/02-jumpbox.md)
 * [Provisioning Compute Resources](docs/03-compute-resources.md)
